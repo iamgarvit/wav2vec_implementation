@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+env/
+venv/
+*.egg-info/
+.Python
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints
+
+# PyTorch / Model checkpoints / data
+*.pt
+*.pth
+checkpoints/
+data/
+datasets/
+logs/
+tensorboard/
+wandb/
+runs/
+
+# Training artifacts
+*.ckpt
+*.safetensors
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
