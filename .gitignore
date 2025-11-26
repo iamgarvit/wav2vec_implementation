@@ -36,3 +36,5 @@ runs/
 .idea/
 *.swp
 *.swo
+
+*.code-workspace
