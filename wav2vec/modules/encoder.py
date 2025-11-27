@@ -34,7 +34,7 @@ class Encoder(torch.nn.Module):
         for out_c, k, s, p in zip(self.conv_channels, self.kernel_sizes, self.strides, self.paddings):
             conv = nn.Conv1d(in_channels=prev_channels, out_channels=out_c, kernel_size=k, stride=s, padding=p, bias=False)
             self.conv_layers.append(conv)
-            self.norm_layers.append(nn.LayerNorm(out_c))
+            self.norm_layers.append(nn.LayerNorm(out_c, eps=1e-5))
             self.activations.append(nn.GELU())
             self.dropouts.append(nn.Dropout(p=self.dropout_prob))
             prev_channels = out_c
