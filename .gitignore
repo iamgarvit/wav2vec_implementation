@@ -12,6 +12,7 @@ dist/
 
 # Jupyter
 .ipynb_checkpoints
+*.ipynb
 
 # PyTorch / Model checkpoints / data
 *.pt
