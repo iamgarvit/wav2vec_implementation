@@ -44,15 +44,18 @@ def train_epoch(model, dataloader, optimizer, device, epoch, num_negatives=100, 
         lengths = batch['lengths'].to(device)
         
         outputs = model(audio, lengths)
-        
-        loss, loss_dict = model.compute_loss(
+
+        model_ref = model.module if isinstance(model, nn.DataParallel) else model
+        loss, loss_dict = model_ref.compute_loss(
             outputs,
             num_negatives=num_negatives,
             temperature=temperature,
             diversity_weight=diversity_weight
         )
-        
+
         optimizer.zero_grad()
+        if loss.numel() > 1:
+            loss = loss.mean()
         loss.backward()
         
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)

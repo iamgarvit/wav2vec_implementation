@@ -149,9 +149,9 @@ class Wav2Vec(nn.Module):
         total_loss = contrastive_loss + diversity_weight * diversity_loss
         
         loss_dict = {
-            'total_loss': total_loss.item(),
-            'contrastive_loss': contrastive_loss.item(),
-            'diversity_loss': diversity_loss.item()
+            'total_loss': total_loss.mean().item() if total_loss.numel() > 1 else total_loss.item(),
+            'contrastive_loss': contrastive_loss.mean().item() if contrastive_loss.numel() > 1 else contrastive_loss.item(),
+            'diversity_loss': diversity_loss.mean().item() if diversity_loss.numel() > 1 else diversity_loss.item()
         }
         
         return total_loss, loss_dict
